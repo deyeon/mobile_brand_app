@@ -24,12 +24,15 @@ def run_search_app():
     st.subheader('휴대폰을 검색해보세요')
 
 
+
     brand_word = st.text_input('휴대폰 이름 입력(영어로)')
 
 
     st.text(brand_word)
     
     df_brand=df[df['product name'].str.contains(brand_word,case=False)]
-
-    if len(brand_word)!= 0:
+    
+    if len(brand_word) != 0:
         st.dataframe(df_brand)
+    else :
+        st.info('검색어를 입력하세요')
