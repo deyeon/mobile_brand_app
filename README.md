@@ -27,3 +27,4 @@
 
 데이터 레퍼런스
 
+https://www.kaggle.com/datasets/shreyamishra0307/top-5-mobile-brands-amazon-dataset
