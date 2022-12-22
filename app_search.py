@@ -34,5 +34,10 @@ def run_search_app():
     
     if len(brand_word) != 0:
         st.dataframe(df_brand)
+        chick =st.checkbox('url주소')
+        if chick:
+            for i in range(0,len(df_brand['Url'])):
+                st.text(df_brand['product name'].values[i])
+                st.markdown(df_brand['Url'].values[i])
     else :
         st.info('검색어를 입력하세요')

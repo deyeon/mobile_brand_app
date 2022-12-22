@@ -38,11 +38,11 @@ def run_data_app():
         df_max1=df.loc[df['Price']==df['Price'].max(),]
         df_min1=df.loc[df['Price']==df['Price'].min(),]
 
-        st.text('가격 최대 데이터')
+        st.text('가격 최대 - {}'.format(df_max1['product name'].values[0]))
         st.image('https://i.expansys.net/img/b/363571/apple-iphone-13-pro-5g-dual-sim.jpg')
         st.dataframe(df_max1)
         
-        st.text('가격 최소 데이터')
+        st.text('가격 최대 - {}'.format(df_min1['product name'].values[0]))
         st.image('https://m.media-amazon.com/images/I/517tjy9KDhL._SY445_.jpg')
         st.dataframe(df_min1)
 
@@ -51,10 +51,10 @@ def run_data_app():
         df_max2=df.loc[df['Rating']==df['Rating'].max(),]
         df_min2=df.loc[df['Rating']==df['Rating'].min(),]
 
-        st.text('평점 최대 데이터')
+        st.text('평점 최대 - {}'.format(df_max2['product name'].values[0]))
         st.image('https://m.media-amazon.com/images/I/51EknP3PutL._SX522_.jpg')
         st.dataframe(df_max2)
-        st.text('평점 최소 데이터')
+        st.text('평점 최소 - {}'.format(df_min2['product name'].values[0]))
         st.image('https://m.media-amazon.com/images/I/517tjy9KDhL._SY445_.jpg')
         st.dataframe(df_min2)
 
@@ -63,10 +63,10 @@ def run_data_app():
         df_max3=df.loc[df['ReviewCount']==df['ReviewCount'].max(),]
         df_min3=df.loc[df['ReviewCount']==df['ReviewCount'].min(),]
 
-        st.text('리뷰수 최대 데이터')
+        st.text('리뷰수 최대 - {}'.format(df_max3['product name'].values[0]))
         st.image('https://m.media-amazon.com/images/I/716nHhG9SWL._SY445_.jpg')
         st.dataframe(df_max3)
-        st.text('리뷰수최소 데이터')
+        st.text('리뷰수 최대 - {}'.format(df_min3['product name'].values[0]))
         st.image('https://m.media-amazon.com/images/I/61vBPptSghL._SL1500_.jpg')
         st.dataframe(df_min3)
     
