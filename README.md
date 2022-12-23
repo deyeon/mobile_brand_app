@@ -45,7 +45,7 @@
 
 
 
-스크린샷!
+# 스크린샷!
 
 ![image](https://user-images.githubusercontent.com/120348521/208591410-05d24c65-133c-46c9-9270-b22d16bebf6a.png)
 
@@ -63,6 +63,6 @@
 
 
 
-데이터 레퍼런스
+# 데이터 레퍼런스
 
 https://www.kaggle.com/datasets/shreyamishra0307/top-5-mobile-brands-amazon-dataset
