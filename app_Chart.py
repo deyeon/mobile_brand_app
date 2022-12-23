@@ -24,21 +24,23 @@ def run_chart_app():
     df['brand']=df['brand'].str.replace('vivo','Vivo')
     df['brand']=df['brand'].str.replace('OPPO','Oppo')
     df['series']=brand_and_product.str.get(1)
-
+    df_show =df.loc[:,['product name', 'Price', 'Rating', 'ReviewCount','brand','series']]
+    df_rmax=df_show[df_show['ReviewCount']>100]
 
     st.subheader('컬럼 별 히스토그램와 파이차트')
     st.text('가격별,평점별,브랜드별 수량 분포를 히스토그램으로 나타내었습니다.')
-    status2 =st.radio('기준을 선택하세요',['가격','평점','브랜드'])
+    status2 =st.radio('기준을 선택하세요',['가격(단위 cent (￠))','평점(리뷰수 최소 100명대비)','브랜드'])
     
-    if status2 == '가격' :
+    if status2 == '가격(단위 cent (￠))' :
         st.subheader("가격별 히스토그램")
         fig1=px.histogram(df, x=df['Price'],width=700, height=600,color_discrete_sequence=["red"])
         fig1.update_layout(bargap=0.2,plot_bgcolor='#FFFFFF')
+        fig1.update_xaxes(title_text = "Price(cent (￠))")
         st.plotly_chart(fig1)
 
-    elif status2 == '평점' :
-        st.subheader("평점별 히스토그램")
-        fig2=px.histogram(df, x=df['Rating'],width=700, height=600,color_discrete_sequence=["green"])
+    elif status2 == '평점(리뷰수 최소 100명대비)' :
+        st.subheader("평점(리뷰수 최소 100명대비)별 히스토그램")
+        fig2=px.histogram(df_rmax, x=df_rmax['Rating'],width=700, height=600,color_discrete_sequence=["green"])
         fig2.update_layout(bargap=0.2,plot_bgcolor='#FFFFFF')
         st.plotly_chart(fig2)
     

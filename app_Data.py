@@ -25,48 +25,51 @@ def run_data_app():
 
 
     st.subheader('데이터 요약')
-    st.text('Price= 가격,Rating= 평점,ReviewCount= 리뷰수 등의 데이터의 요약 표입니다.')
+    st.text('Price= 가격(단위 cent (￠)),Rating= 평점,ReviewCount= 리뷰수 등의 데이터의 요약 표입니다.')
     st.dataframe(df.describe())
 
+    df_show =df.loc[:,['product name', 'Price', 'Rating', 'ReviewCount','brand','series']]
+    df_show=df_show.drop_duplicates(['product name', 'Price'])
     st.subheader('최대/최소 데이터 확인하기')
     st.text('가격,평점,리뷰수 별로 최대,최소값을 사진과 데이터를 통해 볼수 있습니다.')
-    status1 =st.radio('기준을 선택하세요',['가격','평점','리뷰수'])
-    if status1 == '가격' :
+    status1 =st.radio('기준을 선택하세요',['가격(단위 cent (￠))','평점(리뷰수 최소 100명대비)','리뷰수'])
+    if status1 == '가격(단위 cent (￠))' :
 
-        df_max1=df.loc[df['Price']==df['Price'].max(),]
-        df_min1=df.loc[df['Price']==df['Price'].min(),]
+        df_max1=df_show.sort_values(by='Price',ascending=False)
+        df_min1=df_show.sort_values(by='Price')
 
-        st.text('가격 최대 - {}'.format(df_max1['product name'].values[0]))
+        st.text('가격(단위 cent (￠)) 최대 - {}'.format(df_max1['product name'].values[0]))
         st.image('https://i.expansys.net/img/b/363571/apple-iphone-13-pro-5g-dual-sim.jpg')
-        st.dataframe(df_max1)
+        st.dataframe(df_max1.head(5))
         
-        st.text('가격 최대 - {}'.format(df_min1['product name'].values[0]))
+        st.text('가격(단위 cent (￠)) 최대 - {}'.format(df_min1['product name'].values[0]))
         st.image('https://m.media-amazon.com/images/I/517tjy9KDhL._SY445_.jpg')
-        st.dataframe(df_min1)
+        st.dataframe(df_min1.head(5))
 
-    elif status1 == '평점' :
+    elif status1 == '평점(리뷰수 최소 100명대비)' :
+        df_rmax=df_show[df_show['ReviewCount']>100]
 
-        df_max2=df.loc[df['Rating']==df['Rating'].max(),]
-        df_min2=df.loc[df['Rating']==df['Rating'].min(),]
+        df_max2=df_rmax.sort_values(by='Rating',ascending=False)
+        df_min2=df_rmax.sort_values(by='Rating')
 
-        st.text('평점 최대 - {}'.format(df_max2['product name'].values[0]))
-        st.image('https://m.media-amazon.com/images/I/51EknP3PutL._SX522_.jpg')
-        st.dataframe(df_max2)
-        st.text('평점 최소 - {}'.format(df_min2['product name'].values[0]))
-        st.image('https://m.media-amazon.com/images/I/517tjy9KDhL._SY445_.jpg')
-        st.dataframe(df_min2)
+        st.text('평점 최대 (리뷰수 최소 100명대비) - {}'.format(df_max2['product name'].values[0]))
+        st.image('https://m.media-amazon.com/images/I/31RbHXz7-fL._AC_SY1000_.jpg')
+        st.dataframe(df_max2.head(5))
+        st.text('평점 최소 (리뷰수 최소 100명대비)- {}'.format(df_min2['product name'].values[0]))
+        st.image('https://m.media-amazon.com/images/I/417iF-mQUkL._SL1024_.jpg')
+        st.dataframe(df_min2.head(5))
 
     elif status1 == '리뷰수' :
 
-        df_max3=df.loc[df['ReviewCount']==df['ReviewCount'].max(),]
-        df_min3=df.loc[df['ReviewCount']==df['ReviewCount'].min(),]
+        df_max3=df_show.sort_values(by='ReviewCount',ascending=False)
+        df_min3=df_show.sort_values(by='ReviewCount')
 
         st.text('리뷰수 최대 - {}'.format(df_max3['product name'].values[0]))
         st.image('https://m.media-amazon.com/images/I/716nHhG9SWL._SY445_.jpg')
-        st.dataframe(df_max3)
+        st.dataframe(df_max3.head(5))
         st.text('리뷰수 최대 - {}'.format(df_min3['product name'].values[0]))
         st.image('https://m.media-amazon.com/images/I/61vBPptSghL._SL1500_.jpg')
-        st.dataframe(df_min3)
+        st.dataframe(df_min3.head(5))
 
 
 
