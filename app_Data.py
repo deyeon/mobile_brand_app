@@ -70,7 +70,22 @@ def run_data_app():
         st.image('https://m.media-amazon.com/images/I/61vBPptSghL._SL1500_.jpg')
         st.dataframe(df_min3)
     
+
     
+    st.subheader('상관관계 분석')
+    st.text("각 컬럼간의 상관관계를 분석하였습니다.")
+    st.text("컬럼을 선택하여 상관분석을 할수 있습니다.")
+    
+    c_list = df.columns[1:3+1]
+    selected_list=st.multiselect('상관분석을 하고싶은 컬럼을 선택하세요', c_list)
+
+    if len(selected_list) >= 2:
+            df_corr=df[selected_list].corr()
+            fig = plt.figure()
+            sb.heatmap(data=df_corr,annot=True,fmt='.2f',cmap='coolwarm',
+            vmin = -1,vmax=1,linewidths=0.5)
+            st.pyplot(fig)
+
 
 
 

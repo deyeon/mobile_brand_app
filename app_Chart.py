@@ -63,3 +63,17 @@ def run_chart_app():
         df5=df['series']+"-"+df['brand']
         fig5 = px.pie(df,names=df5.value_counts().head(10).index,values=df['series'].value_counts().head(10))
         st.plotly_chart(fig5)
+
+    st.subheader('상관관계 분석')
+    st.text("각 컬럼간의 상관관계를 분석하였습니다.")
+    st.text("컬럼을 선택하여 상관분석을 할수 있습니다.")
+    
+    c_list = df.columns[1:3+1]
+    selected_list=st.multiselect('상관분석을 하고싶은 컬럼을 선택하세요', c_list)
+
+    if len(selected_list) >= 2:
+            df_corr=df[selected_list].corr()
+            fig6 = plt.figure()
+            sb.heatmap(data=df_corr,annot=True,fmt='.2f',cmap='coolwarm',
+            vmin = -1,vmax=1,linewidths=0.5)
+            st.pyplot(fig6)
