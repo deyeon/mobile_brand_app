@@ -26,8 +26,6 @@ def run_data_app():
 
     st.subheader('데이터 요약')
     st.text('Price= 가격,Rating= 평점,ReviewCount= 리뷰수 등의 데이터의 요약 표입니다.')
-    st.text('각각 count = 총갯수,mean= 평균,std= 표준편차, min= 최소값, 25%= 4분위수의 25%값,')
-    st.text('50%= 4분위수의 50%값, 75% = 4분위수의 75%값, max= 최대값을 나타냅니다.')
     st.dataframe(df.describe())
 
     st.subheader('최대/최소 데이터 확인하기')
@@ -69,22 +67,6 @@ def run_data_app():
         st.text('리뷰수 최대 - {}'.format(df_min3['product name'].values[0]))
         st.image('https://m.media-amazon.com/images/I/61vBPptSghL._SL1500_.jpg')
         st.dataframe(df_min3)
-    
-
-    
-    st.subheader('상관관계 분석')
-    st.text("각 컬럼간의 상관관계를 분석하였습니다.")
-    st.text("컬럼을 선택하여 상관분석을 할수 있습니다.")
-    
-    c_list = df.columns[1:3+1]
-    selected_list=st.multiselect('상관분석을 하고싶은 컬럼을 선택하세요', c_list)
-
-    if len(selected_list) >= 2:
-            df_corr=df[selected_list].corr()
-            fig = plt.figure()
-            sb.heatmap(data=df_corr,annot=True,fmt='.2f',cmap='coolwarm',
-            vmin = -1,vmax=1,linewidths=0.5)
-            st.pyplot(fig)
 
 
 
